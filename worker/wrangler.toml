@@ -2,8 +2,7 @@ name = "depannagefrance-router"
 main = "index.ts"
 compatibility_date = "2024-12-01"
 
-# Route toutes les requêtes *.depannagefrance.com vers ce worker
 routes = [
-  { pattern = "*.depannagefrance.com", zone_name = "depannagefrance.com" },
-  { pattern = "depannagefrance.com", zone_name = "depannagefrance.com" }
+  { pattern = "depannagefrance.com/*", zone_name = "depannagefrance.com" },
+  { pattern = "*.depannagefrance.com/*", zone_name = "depannagefrance.com" }
 ]
