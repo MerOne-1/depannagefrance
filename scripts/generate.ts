@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'fs'
+import { readFileSync, writeFileSync, mkdirSync, rmSync, cpSync } from 'fs'
 import { resolve, dirname } from 'path'
 
 const ROOT = resolve(dirname(new URL(import.meta.url).pathname), '..')
@@ -151,3 +151,13 @@ writeFileSync(resolve(ROOT, 'worker', 'routes.json'), JSON.stringify(routes, nul
 
 console.log(`✅ ${count} pages générées dans dist/`)
 console.log(`✅ ${Object.keys(routes).length} routes générées dans worker/routes.json`)
+
+// -- Copier les assets statiques dans dist --
+
+const assetsToRoot = ['logo.png', 'favicon.png']
+for (const asset of assetsToRoot) {
+  const src = resolve(TEMPLATES, asset)
+  const dest = resolve(DIST, asset)
+  try { cpSync(src, dest) } catch {}
+}
+console.log(`✅ Assets copiés (logo, favicon)`)
