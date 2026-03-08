@@ -101,6 +101,7 @@ function buildZonesTitle(region: Region): string {
 rmSync(DIST, { recursive: true, force: true })
 
 let count = 0
+const routes: Record<string, string> = {}
 
 for (const region of regions) {
   for (const trade of trades) {
@@ -130,12 +131,23 @@ for (const region of regions) {
         .replace(/\{\{URGENCE_BANNER_DESC\}\}/g, trade.urgenceBannerDesc)
         .replace(/\{\{POSTHOG_SCRIPT\}\}/g, POSTHOG_SCRIPT)
 
+      const pagePath = `/${trade.slug}/${region.department}/${sector.slug}/index.html`
       const dir = resolve(DIST, trade.slug, region.department, sector.slug)
       mkdirSync(dir, { recursive: true })
       writeFileSync(resolve(dir, 'index.html'), html)
+
+      // Route : sous-domaine → chemin
+      // debouchage-lille → /debouchage/59/lille/index.html
+      const subdomain = `${trade.slug}-${sector.slug}`
+      routes[subdomain] = pagePath
+
       count++
     }
   }
 }
 
+// Écrire la table de routage pour le Worker
+writeFileSync(resolve(ROOT, 'worker', 'routes.json'), JSON.stringify(routes, null, 2))
+
 console.log(`✅ ${count} pages générées dans dist/`)
+console.log(`✅ ${Object.keys(routes).length} routes générées dans worker/routes.json`)

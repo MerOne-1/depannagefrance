@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages
+name: Deploy to Cloudflare
 
 on:
   push:
@@ -17,12 +17,19 @@ jobs:
       - name: Install dependencies
         run: npm install tsx
 
-      - name: Generate static pages
+      - name: Generate static pages + routes
         run: npx tsx scripts/generate.ts
 
-      - name: Deploy to Cloudflare Pages
+      - name: Deploy Pages (static HTML)
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=depannagefrance
+
+      - name: Deploy Worker (subdomain router)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: worker
