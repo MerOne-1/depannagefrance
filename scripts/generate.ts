@@ -86,7 +86,7 @@ const POSTHOG_SCRIPT = `<script>
     posthog.init('phc_kC8LYvqqbzcwseYwunvMBzP1mXosx7i5dM6uwxOmzzg',{api_host:'https://eu.i.posthog.com',capture_pageview:true,capture_pageleave:true,autocapture:true,session_recording:{recordCrossOriginIframes:true},enable_heatmaps:true,persistence:'localStorage+cookie'});
     window._phReady=true;window.dispatchEvent(new Event('posthog:ready'));
     }['scroll','click','touchstart','mousemove','keydown'].forEach(function(e){window.addEventListener(e,_lph,{once:true,passive:true})});
-    setTimeout(_lph,3000);})();
+    setTimeout(_lph,5000);})();
   </script>`
 
 // -- Helpers --
@@ -186,6 +186,29 @@ function buildStructuredData(trade: Trade, sector: Sector, region: Region, canon
   return `<script type="application/ld+json">${JSON.stringify(sd)}</script>`
 }
 
+// -- Minify HTML (inline CSS + JS + whitespace) --
+function minifyHtml(html: string): string {
+  // Minify inline <style> blocks
+  html = html.replace(/<style>([\s\S]*?)<\/style>/g, (_match, css: string) => {
+    const minCss = css
+      .replace(/\/\*[\s\S]*?\*\//g, '')       // remove comments
+      .replace(/\s*([{}:;,>~+])\s*/g, '$1')   // remove space around symbols
+      .replace(/;\}/g, '}')                     // remove last semicolon
+      .replace(/\n+/g, '')                      // remove newlines
+      .replace(/  +/g, ' ')                     // collapse spaces
+      .trim()
+    return `<style>${minCss}</style>`
+  })
+  // Collapse HTML whitespace (outside <script>)
+  const parts = html.split(/(<script[\s\S]*?<\/script>)/g)
+  for (let i = 0; i < parts.length; i++) {
+    if (!parts[i].startsWith('<script')) {
+      parts[i] = parts[i].replace(/\n\s*\n/g, '\n').replace(/  +/g, ' ')
+    }
+  }
+  return parts.join('')
+}
+
 // -- Clean dist --
 rmSync(DIST, { recursive: true, force: true })
 
@@ -239,6 +262,8 @@ for (const region of regions) {
         .replace(/\{\{SECTOR_SLUG\}\}/g, sector.slug)
         .replace(/\{\{SECTOR_NAME\}\}/g, sector.name)
         .replace(/\{\{DEPARTMENT\}\}/g, region.department)
+
+      html = minifyHtml(html)
 
       const pagePath = `/${trade.slug}/${region.department}/${sector.slug}/index.html`
       const dir = resolve(DIST, trade.slug, region.department, sector.slug)
