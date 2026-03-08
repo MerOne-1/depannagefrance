@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="40" height="40">
+  <circle cx="40" cy="40" r="38" fill="none" stroke="#1a1a1a" stroke-width="3"/>
+  <circle cx="40" cy="40" r="34" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- Stylized female profile facing right -->
+  <path d="M28 58 C28 58 26 50 27 44 C28 38 30 34 32 30 C34 26 36 22 38 20 C40 18 42 16 44 16 C46 16 48 17 49 19 C50 21 50 23 50 25 C50 27 49 29 48 31 C47 33 46 34 46 36 C46 38 47 40 48 41 C49 42 51 42 52 43 C53 44 54 46 54 48 C54 50 53 52 51 54 C49 56 46 57 44 58 C42 59 38 59 36 58 C34 57 30 58 28 58Z"
+    fill="#1a1a1a"/>
+  <!-- Hair flowing lines -->
+  <path d="M44 16 C46 14 48 13 50 14 C52 15 53 17 54 20 C55 23 55 27 54 31 C53 35 51 38 50 40"
+    fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+  <path d="M50 14 C52 12 55 12 57 14 C59 16 59 20 58 24 C57 28 55 32 53 35"
+    fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M57 14 C59 13 61 14 62 17 C63 20 62 25 60 30"
+    fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
