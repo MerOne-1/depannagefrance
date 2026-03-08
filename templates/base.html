@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{PAGE_TITLE}}</title>
   <meta name="description" content="{{META_DESCRIPTION}}">
+  <meta name="theme-color" content="#081018">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  {{STRUCTURED_DATA}}
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -317,8 +320,7 @@
     .hero-reassurance {
       margin-top: 24px;
       font-size: 13px;
-      color: var(--text-light);
-      opacity: 0.7;
+      color: #8a9bb4;
       animation: fadeInUp 0.5s ease-out 0.4s both;
     }
 
@@ -570,8 +572,7 @@
     }
     .review-meta {
       font-size: 12px;
-      color: var(--text-light);
-      opacity: 0.6;
+      color: #8a9bb4;
     }
 
     /* ========== ZONES ========== */
@@ -733,7 +734,7 @@
       border-top: 1px solid rgba(255,255,255,0.05);
       font-size: 11px;
       color: var(--text-light);
-      opacity: 0.4;
+      color: #6b7a8d;
     }
 
     /* ========== FIXED CTA BAR ========== */
@@ -853,14 +854,16 @@
       .trust-icon { width: 30px; height: 30px; }
     }
   </style>
+  <style>.skip-link{position:absolute;top:-40px;left:0;background:var(--cta-red);color:#fff;padding:8px 16px;z-index:10000;font-size:14px;text-decoration:none;}.skip-link:focus{top:0;}</style>
   {{POSTHOG_SCRIPT}}
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Aller au contenu principal</a>
 
   <!-- TOPBAR -->
-  <div class="topbar">
+  <header class="topbar" role="banner">
     <div class="container">
-      <a href="#" class="topbar-logo">
+      <a href="/" class="topbar-logo" aria-label="Dépannage France — Accueil">
         <div class="topbar-logo-mark">
           <img src="/logo.png" alt="Dépannage France">
         </div>
@@ -871,28 +874,29 @@
       </a>
       <div class="topbar-center">
         <div class="topbar-badge">
-          <div class="pulse-dot"></div>
+          <div class="pulse-dot" aria-hidden="true"></div>
           Disponible maintenant
         </div>
         <div class="topbar-badge">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Assurance decennale
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Assurance décennale
         </div>
       </div>
-      <a href="tel:{{PHONE}}" class="topbar-phone">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <a href="tel:{{PHONE}}" class="topbar-phone" aria-label="Appeler le {{PHONE_DISPLAY}}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         {{PHONE_DISPLAY}}
       </a>
     </div>
-  </div>
+  </header>
 
   <!-- HERO -->
+  <main id="main-content">
   <section class="hero">
-    <canvas class="water-canvas" id="waterCanvas"></canvas>
-    <div class="water-line"></div>
+    <canvas class="water-canvas" id="waterCanvas" aria-hidden="true"></canvas>
+    <div class="water-line" aria-hidden="true"></div>
     <div class="container">
       <div class="hero-urgency">
-        <div class="pulse-dot"></div>
+        <div class="pulse-dot" aria-hidden="true"></div>
         {{HERO_URGENCY}}
       </div>
       <h1>
@@ -906,13 +910,13 @@
         {{HERO_TYPES}}
       </div>
       <div class="hero-cta-group">
-        <a href="tel:{{PHONE}}" class="btn-cta">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:{{PHONE}}" class="btn-cta" data-ph="cta_hero_call">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           Appeler maintenant
         </a>
         <a href="#types" class="btn-secondary">
           {{SECONDARY_CTA}}
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </a>
       </div>
       <p class="hero-reassurance">Ouvert 24h/24, 7j/7 — jours fériés, week-ends, vacances scolaires</p>
@@ -920,22 +924,22 @@
   </section>
 
   <!-- TRUST STRIP -->
-  <div class="trust-strip">
+  <div class="trust-strip" role="complementary" aria-label="Garanties">
     <div class="container">
       <div class="trust-item">
-        <div class="trust-icon gold">
+        <div class="trust-icon gold" aria-hidden="true">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
         4.8/5 avis vérifiés
       </div>
       <div class="trust-item">
-        <div class="trust-icon blue">
+        <div class="trust-icon blue" aria-hidden="true">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         Assurance décennale
       </div>
       <div class="trust-item">
-        <div class="trust-icon red">
+        <div class="trust-icon red" aria-hidden="true">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
         </div>
         Dispo 24h/24
@@ -960,8 +964,8 @@
   <section class="mid-cta">
     <div class="container">
       <h2>{{MID_CTA_TITLE}}</h2>
-      <a href="tel:{{PHONE}}" class="btn-white">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <a href="tel:{{PHONE}}" class="btn-white" data-ph="cta_mid_call">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         Appeler le {{PHONE_DISPLAY}}
       </a>
     </div>
@@ -1025,48 +1029,43 @@
     <div class="container">
       <h2>{{URGENCE_BANNER_TITLE}}</h2>
       <p>{{URGENCE_BANNER_DESC}}</p>
-      <a href="tel:{{PHONE}}" class="btn-white">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <a href="tel:{{PHONE}}" class="btn-white" data-ph="cta_urgence_call">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         {{PHONE_DISPLAY}}
       </a>
     </div>
   </section>
+  </main>
 
   <!-- FOOTER -->
-  <footer>
+  <footer role="contentinfo">
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="/logo.png" alt="Dépannage France" style="height:32px;width:32px;border-radius:50%;vertical-align:middle;margin-right:8px;">
+          <img src="/logo.png" alt="" style="height:32px;width:32px;border-radius:50%;vertical-align:middle;margin-right:8px;" width="32" height="32" loading="lazy">
           dépannage<span>france</span>
         </div>
-        <div class="footer-links">
-          <a href="#">Mentions légales</a>
-          <a href="#">CGV</a>
-          <a href="#">Contact</a>
-        </div>
+        <nav class="footer-links" aria-label="Liens légaux">
+          <a href="tel:{{PHONE}}">Contact : {{PHONE_DISPLAY}}</a>
+        </nav>
       </div>
       <div class="footer-copy">
-        © 2026 — Tous droits réservés. SIRET : 935 386 383 00019
+        © 2026 Dépannage France — Tous droits réservés. SIRET : 935 386 383 00019
       </div>
     </div>
   </footer>
 
   <!-- FIXED CTA BAR -->
-  <div class="fixed-cta" id="fixedCta">
+  <div class="fixed-cta" id="fixedCta" role="complementary" aria-label="Appel rapide">
     <div class="container">
       <div class="fixed-cta-text">
         {{FIXED_CTA_TEXT}}
         <span>Disponible 24h/24, 7j/7</span>
       </div>
       <div class="fixed-cta-actions">
-        <a href="tel:{{PHONE}}" class="btn-fixed">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:{{PHONE}}" class="btn-fixed" data-ph="cta_fixed_call">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           Appeler
-        </a>
-        <a href="#" class="btn-fixed-alt">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Être rappelé
         </a>
       </div>
     </div>
@@ -1366,8 +1365,9 @@
         requestAnimationFrame(animate);
       }
 
-      // Perf: only when visible
+      // Perf: only when visible + disable on mobile
       let running = false;
+      if (window.innerWidth < 768) { canvas.style.display = 'none'; return; }
       const heroObs = new IntersectionObserver(([e]) => {
         if (e.isIntersecting && !running) {
           running = true;
@@ -1377,6 +1377,126 @@
         }
       }, { threshold: 0 });
       heroObs.observe(hero);
+    })();
+
+    // ========== PostHog — Tracking comportemental complet ==========
+    (function() {
+      if (typeof posthog === 'undefined') return;
+
+      // Propriétés de page injectées à la génération
+      var pageProps = {
+        trade: '{{TRADE_SLUG}}',
+        sector: '{{SECTOR_SLUG}}',
+        department: '{{DEPARTMENT}}',
+        sector_name: '{{SECTOR_NAME}}',
+        phone: '{{PHONE}}'
+      };
+      posthog.register(pageProps);
+
+      // 1. Tracking des clics CTA (via data-ph attributes)
+      document.addEventListener('click', function(e) {
+        var el = e.target.closest('[data-ph]');
+        if (el) {
+          posthog.capture('cta_click', {
+            cta_id: el.getAttribute('data-ph'),
+            cta_text: el.textContent.trim().substring(0, 50),
+            cta_href: el.href || ''
+          });
+        }
+        // Tracking spécifique des clics téléphone
+        var tel = e.target.closest('a[href^="tel:"]');
+        if (tel) {
+          posthog.capture('phone_call_click', {
+            phone_number: tel.href.replace('tel:', ''),
+            click_location: tel.closest('section')
+              ? tel.closest('section').className.split(' ')[0]
+              : (tel.closest('header') ? 'topbar' : 'fixed_cta')
+          });
+        }
+      });
+
+      // 2. Scroll depth tracking (25%, 50%, 75%, 100%)
+      var scrollMarks = { 25: false, 50: false, 75: false, 100: false };
+      var ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            var h = document.documentElement.scrollHeight - window.innerHeight;
+            var pct = h > 0 ? Math.round((window.scrollY / h) * 100) : 0;
+            [25, 50, 75, 100].forEach(function(mark) {
+              if (pct >= mark && !scrollMarks[mark]) {
+                scrollMarks[mark] = true;
+                posthog.capture('scroll_depth', { depth_percent: mark });
+              }
+            });
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+
+      // 3. Section visibility tracking
+      var sections = document.querySelectorAll('section, .trust-strip');
+      var sectionSeen = {};
+      var sectionTimers = {};
+      var secObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          var name = entry.target.className.split(' ')[0] || entry.target.id || 'unknown';
+          if (entry.isIntersecting && !sectionSeen[name]) {
+            sectionSeen[name] = true;
+            sectionTimers[name] = Date.now();
+            posthog.capture('section_view', { section: name });
+          }
+          if (!entry.isIntersecting && sectionTimers[name]) {
+            var duration = Math.round((Date.now() - sectionTimers[name]) / 1000);
+            if (duration > 1) {
+              posthog.capture('section_dwell', { section: name, seconds: duration });
+            }
+            delete sectionTimers[name];
+          }
+        });
+      }, { threshold: 0.3 });
+      sections.forEach(function(s) { secObs.observe(s); });
+
+      // 4. Time on page tracking (10s, 30s, 60s, 120s)
+      var timeMarks = [10, 30, 60, 120];
+      var pageStart = Date.now();
+      var timeIdx = 0;
+      var timeInterval = setInterval(function() {
+        if (timeIdx >= timeMarks.length) { clearInterval(timeInterval); return; }
+        var elapsed = Math.round((Date.now() - pageStart) / 1000);
+        if (elapsed >= timeMarks[timeIdx]) {
+          posthog.capture('time_on_page', { seconds: timeMarks[timeIdx] });
+          timeIdx++;
+        }
+      }, 5000);
+
+      // 5. Fixed CTA bar visibility
+      var fixedCtaEl = document.getElementById('fixedCta');
+      if (fixedCtaEl) {
+        var barShown = false;
+        new MutationObserver(function() {
+          if (fixedCtaEl.classList.contains('visible') && !barShown) {
+            barShown = true;
+            posthog.capture('fixed_cta_shown');
+          }
+        }).observe(fixedCtaEl, { attributes: true, attributeFilter: ['class'] });
+      }
+
+      // 6. Device & context enrichment
+      posthog.capture('landing_page_load', {
+        referrer: document.referrer || 'direct',
+        screen_width: window.innerWidth,
+        screen_height: window.innerHeight,
+        is_mobile: window.innerWidth < 768,
+        user_agent: navigator.userAgent,
+        url: window.location.href,
+        utm_source: new URLSearchParams(window.location.search).get('utm_source') || '',
+        utm_medium: new URLSearchParams(window.location.search).get('utm_medium') || '',
+        utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign') || '',
+        utm_term: new URLSearchParams(window.location.search).get('utm_term') || '',
+        gclid: new URLSearchParams(window.location.search).get('gclid') || ''
+      });
     })();
   </script>
 </body>

@@ -79,10 +79,18 @@ interface Trade {
   stats: Stat[]
 }
 
-// -- PostHog (placeholder — remplacer par la vraie clé) --
+// -- PostHog --
 const POSTHOG_SCRIPT = `<script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('YOUR_POSTHOG_KEY', {api_host: 'https://eu.i.posthog.com'})
+    posthog.init('phc_kC8LYvqqbzcwseYwunvMBzP1mXosx7i5dM6uwxOmzzg', {
+      api_host: 'https://eu.i.posthog.com',
+      capture_pageview: true,
+      capture_pageleave: true,
+      autocapture: true,
+      session_recording: { recordCrossOriginIframes: true },
+      enable_heatmaps: true,
+      persistence: 'localStorage+cookie'
+    })
   </script>`
 
 // -- Helpers --
@@ -147,6 +155,41 @@ function buildStats(stats: Stat[]): string {
         </div>`).join('\n')
 }
 
+function buildStructuredData(trade: Trade, sector: Sector, region: Region, canonicalUrl: string): string {
+  const sd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: `Dépannage France — ${trade.name} ${sector.name}`,
+    description: trade.metaDescription.replace('{{SECTOR_NAME}}', sector.name).replace('{{CITIES_SHORT}}', sector.cities.slice(0, 3).join(', ')).replace('{{DEPARTMENT}}', region.department),
+    url: canonicalUrl,
+    telephone: region.phone,
+    areaServed: {
+      '@type': 'GeoCircle',
+      geoMidpoint: { '@type': 'GeoCoordinates', name: sector.name },
+      geoRadius: '30000'
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+      opens: '00:00',
+      closes: '23:59'
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      reviewCount: String(trade.reviews.length),
+      bestRating: '5'
+    },
+    review: trade.reviews.map(r => ({
+      '@type': 'Review',
+      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+      author: { '@type': 'Person', name: r.author },
+      reviewBody: r.text
+    }))
+  }
+  return `<script type="application/ld+json">${JSON.stringify(sd)}</script>`
+}
+
 // -- Clean dist --
 rmSync(DIST, { recursive: true, force: true })
 
@@ -190,14 +233,23 @@ for (const region of regions) {
         .replace(/\{\{STATS_CARDS\}\}/g, buildStats(trade.stats))
         .replace(/\{\{POSTHOG_SCRIPT\}\}/g, POSTHOG_SCRIPT)
 
+      const subdomain = `${trade.slug}-${sector.slug}`
+      const canonicalUrl = `https://${subdomain}.depannagefrance.com/`
+
+      html = html
+        .replace(/\{\{CANONICAL_URL\}\}/g, canonicalUrl)
+        .replace(/\{\{STRUCTURED_DATA\}\}/g, buildStructuredData(trade, sector, region, canonicalUrl))
+        .replace(/\{\{TRADE_SLUG\}\}/g, trade.slug)
+        .replace(/\{\{SECTOR_SLUG\}\}/g, sector.slug)
+        .replace(/\{\{SECTOR_NAME\}\}/g, sector.name)
+        .replace(/\{\{DEPARTMENT\}\}/g, region.department)
+
       const pagePath = `/${trade.slug}/${region.department}/${sector.slug}/index.html`
       const dir = resolve(DIST, trade.slug, region.department, sector.slug)
       mkdirSync(dir, { recursive: true })
       writeFileSync(resolve(dir, 'index.html'), html)
 
       // Route : sous-domaine → chemin
-      // debouchage-lille → /debouchage/59/lille/index.html
-      const subdomain = `${trade.slug}-${sector.slug}`
       routes[subdomain] = pagePath
 
       count++
