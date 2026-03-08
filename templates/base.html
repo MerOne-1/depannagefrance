@@ -867,7 +867,10 @@
     <div class="container">
       <a href="/" class="topbar-logo" aria-label="Dépannage France — Accueil">
         <div class="topbar-logo-mark">
-          <img src="/logo.png" alt="Dépannage France" width="36" height="36">
+          <picture>
+            <source srcset="/logo.webp" type="image/webp">
+            <img src="/logo.png" alt="Dépannage France" width="36" height="36">
+          </picture>
         </div>
         <div class="topbar-logo-text">
           <span class="logo-top">DEPANNAGE</span>
@@ -1382,11 +1385,11 @@
       heroObs.observe(hero);
     })();
 
-    // ========== PostHog — Tracking comportemental complet ==========
-    (function() {
-      if (typeof posthog === 'undefined') return;
+    // ========== PostHog — Tracking (deferred, waits for posthog:ready) ==========
+    var _pageStart = Date.now();
+    function _setupPhTracking() {
+      if (typeof posthog === 'undefined' || !posthog.__SV) return;
 
-      // Propriétés de page injectées à la génération
       var pageProps = {
         trade: '{{TRADE_SLUG}}',
         sector: '{{SECTOR_SLUG}}',
@@ -1396,7 +1399,6 @@
       };
       posthog.register(pageProps);
 
-      // 1. Tracking des clics CTA (via data-ph attributes)
       document.addEventListener('click', function(e) {
         var el = e.target.closest('[data-ph]');
         if (el) {
@@ -1406,7 +1408,6 @@
             cta_href: el.href || ''
           });
         }
-        // Tracking spécifique des clics téléphone
         var tel = e.target.closest('a[href^="tel:"]');
         if (tel) {
           posthog.capture('phone_call_click', {
@@ -1418,7 +1419,6 @@
         }
       });
 
-      // 2. Scroll depth tracking (25%, 50%, 75%, 100%)
       var scrollMarks = { 25: false, 50: false, 75: false, 100: false };
       var ticking = false;
       window.addEventListener('scroll', function() {
@@ -1438,7 +1438,6 @@
         }
       });
 
-      // 3. Section visibility tracking
       var sections = document.querySelectorAll('section, .trust-strip');
       var sectionSeen = {};
       var sectionTimers = {};
@@ -1461,20 +1460,17 @@
       }, { threshold: 0.3 });
       sections.forEach(function(s) { secObs.observe(s); });
 
-      // 4. Time on page tracking (10s, 30s, 60s, 120s)
       var timeMarks = [10, 30, 60, 120];
-      var pageStart = Date.now();
       var timeIdx = 0;
       var timeInterval = setInterval(function() {
         if (timeIdx >= timeMarks.length) { clearInterval(timeInterval); return; }
-        var elapsed = Math.round((Date.now() - pageStart) / 1000);
+        var elapsed = Math.round((Date.now() - _pageStart) / 1000);
         if (elapsed >= timeMarks[timeIdx]) {
           posthog.capture('time_on_page', { seconds: timeMarks[timeIdx] });
           timeIdx++;
         }
       }, 5000);
 
-      // 5. Fixed CTA bar visibility
       var fixedCtaEl = document.getElementById('fixedCta');
       if (fixedCtaEl) {
         var barShown = false;
@@ -1486,7 +1482,6 @@
         }).observe(fixedCtaEl, { attributes: true, attributeFilter: ['class'] });
       }
 
-      // 6. Device & context enrichment
       posthog.capture('landing_page_load', {
         referrer: document.referrer || 'direct',
         screen_width: window.innerWidth,
@@ -1500,7 +1495,9 @@
         utm_term: new URLSearchParams(window.location.search).get('utm_term') || '',
         gclid: new URLSearchParams(window.location.search).get('gclid') || ''
       });
-    })();
+    }
+    if (window._phReady) { _setupPhTracking(); }
+    else { window.addEventListener('posthog:ready', _setupPhTracking); }
   </script>
 </body>
 </html>

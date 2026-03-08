@@ -79,18 +79,14 @@ interface Trade {
   stats: Stat[]
 }
 
-// -- PostHog --
+// -- PostHog (deferred loading — after interaction or 3s) --
 const POSTHOG_SCRIPT = `<script>
+    (function(){var _l=false;function _lph(){if(_l)return;_l=true;
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('phc_kC8LYvqqbzcwseYwunvMBzP1mXosx7i5dM6uwxOmzzg', {
-      api_host: 'https://eu.i.posthog.com',
-      capture_pageview: true,
-      capture_pageleave: true,
-      autocapture: true,
-      session_recording: { recordCrossOriginIframes: true },
-      enable_heatmaps: true,
-      persistence: 'localStorage+cookie'
-    })
+    posthog.init('phc_kC8LYvqqbzcwseYwunvMBzP1mXosx7i5dM6uwxOmzzg',{api_host:'https://eu.i.posthog.com',capture_pageview:true,capture_pageleave:true,autocapture:true,session_recording:{recordCrossOriginIframes:true},enable_heatmaps:true,persistence:'localStorage+cookie'});
+    window._phReady=true;window.dispatchEvent(new Event('posthog:ready'));
+    }['scroll','click','touchstart','mousemove','keydown'].forEach(function(e){window.addEventListener(e,_lph,{once:true,passive:true})});
+    setTimeout(_lph,3000);})();
   </script>`
 
 // -- Helpers --
@@ -265,7 +261,7 @@ console.log(`✅ ${Object.keys(routes).length} routes générées dans worker/ro
 
 // -- Copier les assets statiques dans dist --
 
-const assetsToRoot = ['logo.png', 'favicon.png', 'robots.txt']
+const assetsToRoot = ['logo.png', 'logo.webp', 'favicon.png', 'robots.txt']
 for (const asset of assetsToRoot) {
   const src = resolve(TEMPLATES, asset)
   const dest = resolve(DIST, asset)
