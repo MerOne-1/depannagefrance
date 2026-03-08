@@ -116,7 +116,7 @@ function buildZoneSectors(region: Region, currentSector: Sector): string {
     return `            <div class="zone-sector-card${isCurrent ? ' current' : ''}">
               <div class="zone-sector-icon">📍</div>
               <div>
-                <h4>${s.label}</h4>
+                <h3>${s.label}</h3>
                 <p>${s.name} et environs : ${citiesList}</p>
               </div>
             </div>`
@@ -265,10 +265,10 @@ console.log(`✅ ${Object.keys(routes).length} routes générées dans worker/ro
 
 // -- Copier les assets statiques dans dist --
 
-const assetsToRoot = ['logo.png', 'favicon.png']
+const assetsToRoot = ['logo.png', 'favicon.png', 'robots.txt']
 for (const asset of assetsToRoot) {
   const src = resolve(TEMPLATES, asset)
   const dest = resolve(DIST, asset)
   try { cpSync(src, dest) } catch {}
 }
-console.log(`✅ Assets copiés (logo, favicon)`)
+console.log(`✅ Assets copiés (logo, favicon, robots.txt)`)
