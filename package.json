@@ -1,0 +1,14 @@
+{
+  "name": "depannagefrance",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "npx tsx scripts/generate.ts",
+    "preview": "npx serve dist",
+    "deploy": "npx wrangler pages deploy dist --project-name=depannagefrance"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0"
+  }
+}

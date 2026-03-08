@@ -1,0 +1,92 @@
+[
+  {
+    "department": "59",
+    "name": "Nord",
+    "phone": "0744303178",
+    "phoneDisplay": "07 44 30 31 78",
+    "trades": ["debouchage", "fuite-eau"],
+    "sectors": [
+      {
+        "slug": "lille",
+        "name": "Lille",
+        "label": "Métropole Lilloise",
+        "postal": "59000",
+        "cities": ["Roubaix", "Tourcoing", "Villeneuve-d'Ascq", "Marcq-en-Barœul", "Lambersart", "Wasquehal", "Croix", "Hem", "Mons-en-Barœul", "La Madeleine"]
+      },
+      {
+        "slug": "douai",
+        "name": "Douai",
+        "label": "Secteur Douai",
+        "postal": "59500",
+        "cities": ["Sin-le-Noble", "Dechy", "Waziers", "Aniche", "Somain", "Auby", "Flers-en-Escrebieux"]
+      },
+      {
+        "slug": "dunkerque",
+        "name": "Dunkerque",
+        "label": "Secteur Dunkerque",
+        "postal": "59140",
+        "cities": ["Grande-Synthe", "Coudekerque-Branche", "Saint-Pol-sur-Mer", "Fort-Mardyck", "Leffrinckoucke", "Bray-Dunes", "Gravelines"]
+      }
+    ]
+  },
+  {
+    "department": "62",
+    "name": "Pas-de-Calais",
+    "phone": "0744303178",
+    "phoneDisplay": "07 44 30 31 78",
+    "trades": ["debouchage", "fuite-eau"],
+    "sectors": [
+      {
+        "slug": "lens",
+        "name": "Lens",
+        "label": "Secteur Lens — Liévin",
+        "postal": "62300",
+        "cities": ["Liévin", "Hénin-Beaumont", "Avion", "Harnes", "Noyelles-sous-Lens", "Billy-Montigny", "Sallaumines"]
+      }
+    ]
+  },
+  {
+    "department": "74",
+    "name": "Haute-Savoie",
+    "phone": "0744303178",
+    "phoneDisplay": "07 44 30 31 78",
+    "trades": ["debouchage", "fuite-eau"],
+    "sectors": [
+      {
+        "slug": "annemasse",
+        "name": "Annemasse",
+        "label": "Secteur Annemasse",
+        "postal": "74100",
+        "cities": ["Gaillard", "Ambilly", "Ville-la-Grand", "Vétraz-Monthoux", "Cranves-Sales", "Bonne"]
+      },
+      {
+        "slug": "saint-julien-en-genevois",
+        "name": "Saint-Julien-en-Genevois",
+        "label": "Secteur Saint-Julien-en-Genevois",
+        "postal": "74160",
+        "cities": ["Archamps", "Neydens", "Beaumont", "Valleiry", "Collonges-sous-Salève"]
+      },
+      {
+        "slug": "annecy",
+        "name": "Annecy",
+        "label": "Secteur Annecy",
+        "postal": "74000",
+        "cities": ["Seynod", "Cran-Gevrier", "Meythet", "Argonay", "Pringy", "Épagny"]
+      },
+      {
+        "slug": "thonon-les-bains",
+        "name": "Thonon-les-Bains",
+        "label": "Secteur Thonon — Évian",
+        "postal": "74200",
+        "cities": ["Évian-les-Bains", "Publier", "Sciez", "Douvaine", "Amphion-les-Bains"]
+      },
+      {
+        "slug": "evian-les-bains",
+        "name": "Évian-les-Bains",
+        "label": "Secteur Évian",
+        "postal": "74500",
+        "cities": ["Publier", "Maxilly-sur-Léman", "Neuvecelle", "Saint-Paul-en-Chablais"]
+      }
+    ]
+  }
+]

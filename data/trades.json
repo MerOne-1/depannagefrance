@@ -1,0 +1,84 @@
+[
+  {
+    "slug": "debouchage",
+    "name": "Débouchage",
+    "template": "debouchage.html",
+    "title": "Débouchage urgence {{SECTOR_NAME}} ({{DEPARTMENT}}) — Canalisation, WC, évier",
+    "metaDescription": "Débouchage à {{SECTOR_NAME}} et environs ({{CITIES_SHORT}}). Intervention en 30 min, 24h/24 7j/7. Devis gratuit.",
+    "h1Before": "Canalisation",
+    "h1Accent": "bouchée",
+    "h1After": "On <span class=\"red\">débouche</span> tout.",
+    "heroSubtitle": "WC, évier, douche, baignoire, canalisation enterrée...<br>Quel que soit le bouchon, un plombier équipé intervient chez vous <strong style=\"color:#fff\">en urgence</strong>.",
+    "heroUrgency": "Urgence débouchage — 24h/24, 7j/7",
+    "heroTypes": [
+      "WC bouché",
+      "Évier / lavabo",
+      "Douche / baignoire",
+      "Canalisation",
+      "Colonne immeuble",
+      "Regard extérieur"
+    ],
+    "secondaryCta": "Voir les types de bouchons",
+    "fixedCtaText": "Canalisation bouchée ?",
+    "reviews": [
+      {
+        "text": "WC bouché un dimanche matin avec 3 enfants à la maison. Le plombier est venu avec un furet motorisé, en 30 minutes c'était réglé. Prix correct et travail propre.",
+        "author": "Marie L.",
+        "meta": "WC bouché"
+      },
+      {
+        "text": "L'évier de la cuisine ne s'écoulait plus du tout, de la graisse accumulée dans le siphon et la canalisation. Hydrocurage impeccable, ça coule comme neuf.",
+        "author": "Karim B.",
+        "meta": "Évier bouché"
+      },
+      {
+        "text": "Canalisation d'immeuble bouchée, l'eau remontait dans la douche. Inspection caméra, ils ont trouvé des racines. Curage haute pression, problème résolu.",
+        "author": "Sophie D.",
+        "meta": "Canalisation"
+      }
+    ],
+    "urgenceBannerTitle": "L'eau ne s'écoule plus ? Appelez maintenant.",
+    "urgenceBannerDesc": "Disponible 24h/24, 7j/7 — même la nuit, même le dimanche."
+  },
+  {
+    "slug": "fuite-eau",
+    "name": "Fuite d'eau",
+    "template": "fuite-eau.html",
+    "title": "Fuite d'eau urgence {{SECTOR_NAME}} ({{DEPARTMENT}}) — Réparation rapide",
+    "metaDescription": "Réparation fuite d'eau à {{SECTOR_NAME}} et environs ({{CITIES_SHORT}}). Intervention en 30 min, 24h/24 7j/7. Devis gratuit.",
+    "h1Before": "Fuite d'eau",
+    "h1Accent": "?",
+    "h1After": "On <span class=\"red\">répare</span> tout.",
+    "heroSubtitle": "Quel que soit le type de fuite, un plombier qualifié intervient chez vous <strong style=\"color:#fff\">en urgence</strong>.",
+    "heroUrgency": "Urgence fuite d'eau — 24h/24, 7j/7",
+    "heroTypes": [
+      "Fuite sous évier",
+      "Fuite WC",
+      "Fuite canalisation",
+      "Fuite encastrée",
+      "Fuite chauffe-eau",
+      "Recherche de fuite"
+    ],
+    "secondaryCta": "Voir les types de fuites",
+    "fixedCtaText": "Fuite d'eau ?",
+    "reviews": [
+      {
+        "text": "Fuite sous l'évier en pleine nuit, de l'eau partout dans la cuisine. Le plombier est arrivé en 25 minutes et a remplacé le flexible percé. Efficace et rassurant.",
+        "author": "Marie L.",
+        "meta": "Fuite PVC"
+      },
+      {
+        "text": "Fuite au niveau du ballon d'eau chaude, impossible de couper l'eau seul. Intervention rapide, remplacement du groupe de sécurité. Merci !",
+        "author": "Karim B.",
+        "meta": "Fuite chauffe-eau"
+      },
+      {
+        "text": "Recherche de fuite dans le mur de la salle de bain. Détection thermique, réparation propre sans tout casser. Très professionnel.",
+        "author": "Sophie D.",
+        "meta": "Fuite encastrée"
+      }
+    ],
+    "urgenceBannerTitle": "L'eau coule sans s'arrêter ? Appelez maintenant.",
+    "urgenceBannerDesc": "Disponible 24h/24, 7j/7 — même la nuit, même le dimanche."
+  }
+]
