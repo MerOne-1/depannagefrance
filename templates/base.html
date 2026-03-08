@@ -210,7 +210,6 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 28px;
-      animation: fadeInDown 0.5s ease-out;
     }
     .hero h1 {
       font-family: var(--font-display);
@@ -220,7 +219,6 @@
       line-height: 1.05;
       margin-bottom: 22px;
       letter-spacing: -1.5px;
-      animation: fadeInDown 0.5s ease-out 0.1s both;
     }
     .hero h1 .accent {
       background: linear-gradient(135deg, var(--water-blue), #38bdf8);
@@ -240,7 +238,6 @@
       max-width: 620px;
       margin: 0 auto 32px;
       line-height: 1.65;
-      animation: fadeInDown 0.5s ease-out 0.2s both;
     }
     .hero-types {
       display: flex;
@@ -248,7 +245,6 @@
       justify-content: center;
       gap: 8px;
       margin-bottom: 36px;
-      animation: fadeInDown 0.5s ease-out 0.25s both;
     }
     .hero-type {
       display: inline-flex;
@@ -269,7 +265,6 @@
       justify-content: center;
       gap: 14px;
       flex-wrap: wrap;
-      animation: fadeInUp 0.5s ease-out 0.3s both;
     }
     .btn-cta {
       display: inline-flex;
@@ -325,7 +320,6 @@
       margin-top: 24px;
       font-size: 13px;
       color: #8a9bb4;
-      animation: fadeInUp 0.5s ease-out 0.4s both;
     }
 
     /* ========== TRUST STRIP ========== */
@@ -827,6 +821,12 @@
       transition: opacity 0.5s ease-out, transform 0.5s ease-out;
     }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ========== DEFER BELOW-FOLD RENDERING ========== */
+    .fuites, .mid-cta, .why-us, .social-proof, .zones, .urgence-banner {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 500px;
+    }
 
     /* ========== RESPONSIVE ========== */
     @media (max-width: 768px) {
