@@ -25,7 +25,20 @@ export default {
       return fetch(request)
     }
 
-    // Chercher la route
+    // Assets statiques → proxy direct vers Pages
+    const path = url.pathname
+    if (path !== '/' && path !== '/index.html') {
+      const response = await fetch(`${PAGES_ORIGIN}${path}`)
+      return new Response(response.body, {
+        status: response.status,
+        headers: {
+          ...Object.fromEntries(response.headers),
+          'Cache-Control': 'public, max-age=86400',
+        },
+      })
+    }
+
+    // Chercher la route HTML du sous-domaine
     const route = (routes as Record<string, string>)[subdomain]
     if (!route) {
       return new Response('Page non trouvée', { status: 404 })
