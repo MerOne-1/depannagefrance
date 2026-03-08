@@ -35,6 +35,22 @@ interface Review {
   meta: string
 }
 
+interface TypeCard {
+  icon: string
+  title: string
+  desc: string
+}
+
+interface WhyCard {
+  title: string
+  desc: string
+}
+
+interface Stat {
+  number: string
+  label: string
+}
+
 interface Trade {
   slug: string
   name: string
@@ -52,6 +68,15 @@ interface Trade {
   reviews: Review[]
   urgenceBannerTitle: string
   urgenceBannerDesc: string
+  typesLabel: string
+  typesTitle: string
+  typesDesc: string
+  typesCards: TypeCard[]
+  midCtaTitle: string
+  whyTitle: string
+  whyDesc: string
+  whyCards: WhyCard[]
+  stats: Stat[]
 }
 
 // -- PostHog (placeholder — remplacer par la vraie clé) --
@@ -97,6 +122,31 @@ function buildZonesTitle(region: Region): string {
   return names.join(', ') + ' et ' + last
 }
 
+function buildTypesCards(cards: TypeCard[]): string {
+  return cards.map(c => `        <div class="fuite-card fade-in">
+          <div class="fuite-icon">${c.icon}</div>
+          <h3>${c.title}</h3>
+          <p>${c.desc}</p>
+        </div>`).join('\n')
+}
+
+function buildWhyCards(cards: WhyCard[]): string {
+  return cards.map((c, i) => `        <div class="why-card fade-in">
+          <div class="why-number">${i + 1}</div>
+          <div>
+            <h3>${c.title}</h3>
+            <p>${c.desc}</p>
+          </div>
+        </div>`).join('\n')
+}
+
+function buildStats(stats: Stat[]): string {
+  return stats.map(s => `        <div class="stat-card">
+          <div class="stat-number">${s.number}</div>
+          <div class="stat-label">${s.label}</div>
+        </div>`).join('\n')
+}
+
 // -- Clean dist --
 rmSync(DIST, { recursive: true, force: true })
 
@@ -129,6 +179,15 @@ for (const region of regions) {
         .replace(/\{\{ZONE_SECTORS\}\}/g, buildZoneSectors(region, sector))
         .replace(/\{\{URGENCE_BANNER_TITLE\}\}/g, trade.urgenceBannerTitle)
         .replace(/\{\{URGENCE_BANNER_DESC\}\}/g, trade.urgenceBannerDesc)
+        .replace(/\{\{TYPES_LABEL\}\}/g, trade.typesLabel)
+        .replace(/\{\{TYPES_TITLE\}\}/g, trade.typesTitle)
+        .replace(/\{\{TYPES_DESC\}\}/g, trade.typesDesc)
+        .replace(/\{\{TYPES_CARDS\}\}/g, buildTypesCards(trade.typesCards))
+        .replace(/\{\{MID_CTA_TITLE\}\}/g, trade.midCtaTitle)
+        .replace(/\{\{WHY_TITLE\}\}/g, trade.whyTitle)
+        .replace(/\{\{WHY_DESC\}\}/g, trade.whyDesc)
+        .replace(/\{\{WHY_CARDS\}\}/g, buildWhyCards(trade.whyCards))
+        .replace(/\{\{STATS_CARDS\}\}/g, buildStats(trade.stats))
         .replace(/\{\{POSTHOG_SCRIPT\}\}/g, POSTHOG_SCRIPT)
 
       const pagePath = `/${trade.slug}/${region.department}/${sector.slug}/index.html`

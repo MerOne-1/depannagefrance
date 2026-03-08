@@ -38,7 +38,34 @@
       }
     ],
     "urgenceBannerTitle": "L'eau ne s'écoule plus ? Appelez maintenant.",
-    "urgenceBannerDesc": "Disponible 24h/24, 7j/7 — même la nuit, même le dimanche."
+    "urgenceBannerDesc": "Disponible 24h/24, 7j/7 — même la nuit, même le dimanche.",
+    "typesLabel": "Tous types de bouchons",
+    "typesTitle": "On débouche tout.<br>Sans exception.",
+    "typesDesc": "Peu importe la cause ou l'emplacement, nos plombiers sont équipés pour diagnostiquer et déboucher vos canalisations rapidement et durablement.",
+    "typesCards": [
+      { "icon": "🚽", "title": "WC bouché", "desc": "Papier, lingettes, objet coincé, calcaire. Débouchage mécanique ou haute pression, sans casser." },
+      { "icon": "🍽️", "title": "Évier / lavabo", "desc": "Graisse, résidus alimentaires, savon accumulé. Furet, hydrocurage ou démontage du siphon." },
+      { "icon": "🚿", "title": "Douche / baignoire", "desc": "Cheveux, savon, calcaire. Extraction du bouchon et nettoyage complet de l'évacuation." },
+      { "icon": "🏗️", "title": "Canalisation enterrée", "desc": "Racines, affaissement, accumulation. Inspection caméra et hydrocurage haute pression." },
+      { "icon": "🏢", "title": "Colonne d'immeuble", "desc": "Colonne de chute ou d'évacuation bouchée. Intervention sur parties communes et privatives." },
+      { "icon": "🕳️", "title": "Regard extérieur", "desc": "Regard bouché ou débordant. Curage, nettoyage et remise en état de l'écoulement." },
+      { "icon": "🔍", "title": "Inspection caméra", "desc": "Caméra endoscopique pour localiser le bouchon, les fissures ou les racines sans casser." },
+      { "icon": "💧", "title": "Hydrocurage", "desc": "Nettoyage haute pression pour éliminer graisses, tartre et dépôts tenaces dans vos canalisations." }
+    ],
+    "midCtaTitle": "Canalisation bouchée ? On débouche maintenant.",
+    "whyTitle": "On ne vient pas pour vendre.<br>On vient pour déboucher.",
+    "whyDesc": "Pas de commercial au téléphone. Pas de frais cachés. Un plombier, un diagnostic, un débouchage.",
+    "whyCards": [
+      { "title": "Tarif annoncé avant intervention", "desc": "On vous dit combien ça coûte avant de toucher un outil. Pas de surprise sur la facture." },
+      { "title": "Plombiers qualifiés et équipés", "desc": "Furet, hydrocureuse, caméra d'inspection — le bon matériel pour chaque situation." },
+      { "title": "Disponible nuit et week-end", "desc": "Un bouchon n'attend pas lundi. On intervient 24h/24, 7j/7, jours fériés inclus." },
+      { "title": "Débouchage durable", "desc": "On ne perce pas un trou pour revenir demain. On identifie la cause et on nettoie en profondeur." }
+    ],
+    "stats": [
+      { "number": "2 <span>500+</span>", "label": "Débouchages réalisés" },
+      { "number": "4.8<span>/5</span>", "label": "Note clients" },
+      { "number": "98<span>%</span>", "label": "Débouchés 1re visite" }
+    ]
   },
   {
     "slug": "fuite-eau",
@@ -79,6 +106,33 @@
       }
     ],
     "urgenceBannerTitle": "L'eau coule sans s'arrêter ? Appelez maintenant.",
-    "urgenceBannerDesc": "Disponible 24h/24, 7j/7 — même la nuit, même le dimanche."
+    "urgenceBannerDesc": "Disponible 24h/24, 7j/7 — même la nuit, même le dimanche.",
+    "typesLabel": "Tous types de fuites",
+    "typesTitle": "On répare toutes les fuites.<br>Sans exception.",
+    "typesDesc": "Fuite visible ou cachée, sous pression ou goutte-à-goutte — nos plombiers diagnostiquent et réparent rapidement pour stopper les dégâts.",
+    "typesCards": [
+      { "icon": "🚰", "title": "Fuite sous évier", "desc": "Flexible percé, siphon fissuré ou joint usé. Remplacement rapide et étanchéité garantie." },
+      { "icon": "🚽", "title": "Fuite WC", "desc": "Chasse d'eau qui coule, joint de cuvette défaillant. Réparation ou remplacement du mécanisme." },
+      { "icon": "🔧", "title": "Fuite canalisation", "desc": "Tuyau percé, raccord desserré ou corrosion. Réparation cuivre, PVC, PER ou multicouche." },
+      { "icon": "🧱", "title": "Fuite encastrée", "desc": "Fuite dans le mur ou le sol. Détection par caméra thermique, réparation ciblée sans tout casser." },
+      { "icon": "🔥", "title": "Fuite chauffe-eau", "desc": "Groupe de sécurité, cuve percée ou raccord défaillant. Diagnostic et réparation du ballon." },
+      { "icon": "🔍", "title": "Recherche de fuite", "desc": "Détection par gaz traceur, caméra thermique ou écoute acoustique pour localiser la fuite cachée." },
+      { "icon": "🏠", "title": "Fuite robinet", "desc": "Robinet qui goutte, mitigeur bloqué ou joint de tête usé. Remplacement rapide et économie d'eau." },
+      { "icon": "💧", "title": "Fuite radiateur", "desc": "Purgeur défaillant, vanne percée ou raccord corrodé. Réparation sans vidanger tout le circuit." }
+    ],
+    "midCtaTitle": "Fuite d'eau ? On intervient maintenant.",
+    "whyTitle": "On ne vient pas pour vendre.<br>On vient pour réparer.",
+    "whyDesc": "Pas de commercial au téléphone. Pas de frais cachés. Un plombier, un diagnostic, une réparation.",
+    "whyCards": [
+      { "title": "Tarif annoncé avant intervention", "desc": "On vous dit combien ça coûte avant de toucher un outil. Pas de surprise sur la facture." },
+      { "title": "Plombiers qualifiés et équipés", "desc": "Caméra thermique, détecteur de fuite, outillage professionnel — le bon matériel pour chaque situation." },
+      { "title": "Disponible nuit et week-end", "desc": "Une fuite n'attend pas lundi. On intervient 24h/24, 7j/7, jours fériés inclus." },
+      { "title": "Réparation durable", "desc": "On ne met pas un pansement. On identifie la cause et on répare proprement pour que ça tienne." }
+    ],
+    "stats": [
+      { "number": "3 <span>200+</span>", "label": "Fuites réparées" },
+      { "number": "4.8<span>/5</span>", "label": "Note clients" },
+      { "number": "97<span>%</span>", "label": "Réparées 1re visite" }
+    ]
   }
 ]
