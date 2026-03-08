@@ -25,8 +25,19 @@ export default {
       return fetch(request)
     }
 
-    // Assets statiques → proxy direct vers Pages
+    // robots.txt — servi directement pour éviter l'injection Cloudflare Content-Signal
     const path = url.pathname
+    if (path === '/robots.txt') {
+      return new Response('User-agent: *\nAllow: /\n\nSitemap: https://depannagefrance.com/sitemap.xml\n', {
+        status: 200,
+        headers: {
+          'Content-Type': 'text/plain',
+          'Cache-Control': 'public, max-age=86400',
+        },
+      })
+    }
+
+    // Assets statiques → proxy direct vers Pages
     if (path !== '/' && path !== '/index.html') {
       const response = await fetch(`${PAGES_ORIGIN}${path}`)
       return new Response(response.body, {
