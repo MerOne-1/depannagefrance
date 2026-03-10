@@ -293,3 +293,13 @@ for (const asset of assetsToRoot) {
   try { cpSync(src, dest) } catch {}
 }
 console.log(`✅ Assets copiés (logo, favicon, robots.txt)`)
+
+// -- Copier les pages légales dans dist --
+const LEGAL = resolve(ROOT, 'legal')
+const legalPages = ['conditions-generales-utilisation.html', 'politique-de-confidentialite.html']
+for (const page of legalPages) {
+  const src = resolve(LEGAL, page)
+  const dest = resolve(DIST, page)
+  try { cpSync(src, dest) } catch {}
+}
+console.log(`✅ Pages légales copiées`)

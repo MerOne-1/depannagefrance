@@ -37,6 +37,19 @@ export default {
       })
     }
 
+    // Pages légales → servies depuis n'importe quel sous-domaine
+    if (path === '/conditions-generales-utilisation.html' || path === '/politique-de-confidentialite.html') {
+      const response = await fetch(`${PAGES_ORIGIN}${path}`)
+      return new Response(response.body, {
+        status: response.status,
+        headers: {
+          ...Object.fromEntries(response.headers),
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': 'public, max-age=86400',
+        },
+      })
+    }
+
     // Assets statiques → proxy direct vers Pages
     if (path !== '/' && path !== '/index.html') {
       const response = await fetch(`${PAGES_ORIGIN}${path}`)
