@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{PAGE_TITLE}}</title>
+  <meta name="description" content="{{META_DESCRIPTION}}">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
+  {{STRUCTURED_DATA}}
+  {{GTAG_SCRIPT}}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #faf8f5;
+      --cta: #dc2626;
+      --cta-hover: #b91c1c;
+      --cta-glow: rgba(220,38,38,0.22);
+      --blue: #0284c7;
+      --blue-light: #0ea5e9;
+      --blue-soft: rgba(2,132,199,0.08);
+      --orange: #ea580c;
+      --orange-light: #f97316;
+      --orange-soft: rgba(234,88,12,0.08);
+      --green: #16a34a;
+      --dark: #1a1a2e;
+      --body: #334155;
+      --muted: #64748b;
+      --light: #94a3b8;
+      --border: #e8e4df;
+      --gold: #f59e0b;
+      --warm: #f59e0b;
+      --r: 14px;
+      --rs: 10px;
+      --font-d: 'Outfit', system-ui, sans-serif;
+      --font-b: 'DM Sans', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-b); color: var(--body); background: var(--bg); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    .c { max-width: 480px; margin: 0 auto; padding: 0 20px; }
+
+    /* === TOPBAR === */
+    .topbar { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 10px 0; }
+    .topbar .c { display: flex; align-items: center; justify-content: space-between; }
+    .tb-left { display: flex; align-items: center; gap: 8px; }
+    .tb-logo { width: 32px; height: 32px; border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .tb-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .tb-name { font-family: var(--font-d); line-height: 1.1; }
+    .tb-name b { display: block; font-size: 11px; letter-spacing: 0.8px; color: var(--dark); }
+    .tb-name em { display: block; font-size: 12px; letter-spacing: 0.8px; color: var(--cta); font-style: normal; font-weight: 800; }
+    .tb-live { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--green); font-weight: 600; }
+    .pulse { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(22,163,74,0.5); } 50% { box-shadow: 0 0 0 5px transparent; } }
+
+    /* === HERO === */
+    .hero { background: linear-gradient(180deg, #fff8f0, #fff3e6, #fef9f3); padding: 40px 0 36px; position: relative; overflow: hidden; text-align: center; }
+    .hero .c { position: relative; z-index: 2; }
+    .heat-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+    .badge-urg { display: inline-flex; align-items: center; gap: 6px; background: rgba(234,88,12,0.07); border: 1px solid rgba(234,88,12,0.14); border-radius: 50px; padding: 6px 14px; font-size: 11px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 20px; }
+    .hero h1 { font-family: var(--font-d); font-size: 36px; font-weight: 900; color: var(--dark); line-height: 1.05; letter-spacing: -1.5px; margin-bottom: 16px; }
+    .hero h1 .acc { position: relative; color: var(--orange); display: inline; }
+    .hero h1 .acc::after { content: ''; position: absolute; left: -2px; right: -2px; bottom: 2px; height: 10px; background: rgba(234,88,12,0.12); border-radius: 4px; z-index: -1; }
+    .hero h1 .red { position: relative; color: var(--cta); display: inline; }
+    .hero h1 .red::after { content: ''; position: absolute; left: -2px; right: -2px; bottom: 2px; height: 10px; background: rgba(220,38,38,0.10); border-radius: 4px; z-index: -1; }
+    .hero-sub { font-size: 15px; color: var(--muted); line-height: 1.6; margin-bottom: 24px; max-width: 360px; margin-left: auto; margin-right: auto; }
+    .hero-sub strong { color: var(--dark); }
+    .hero-price { display: inline-flex; align-items: center; gap: 6px; background: rgba(22,163,74,0.06); border: 1px solid rgba(22,163,74,0.12); border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 600; color: var(--green); margin-bottom: 20px; }
+    .hero-price svg { flex-shrink: 0; }
+
+    /* Dual CTA */
+    .dual-cta { display: flex; flex-direction: column; gap: 10px; }
+    .cta-urgence { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 18px; background: var(--cta); color: #fff; font-family: var(--font-d); font-weight: 700; font-size: 16px; border: none; border-radius: var(--r); text-decoration: none; box-shadow: 0 4px 20px var(--cta-glow); transition: all 0.2s; }
+    .cta-urgence:hover { background: var(--cta-hover); }
+    .cta-urgence svg { animation: ring 1.5s ease-in-out infinite; }
+    @keyframes ring { 0%,100%{transform:rotate(0)} 15%{transform:rotate(15deg)} 30%{transform:rotate(-10deg)} 45%{transform:rotate(5deg)} 60%{transform:rotate(0)} }
+    .cta-labels { display: flex; justify-content: space-between; margin-top: 6px; }
+    .cta-label { font-size: 11px; color: var(--light); }
+    .avail-badge { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; padding: 10px 16px; background: rgba(22,163,74,0.07); border: 1px solid rgba(22,163,74,0.15); border-radius: 10px; }
+    .avail-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: blink 2s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .avail-text { font-size: 14px; font-weight: 700; color: var(--green); font-family: var(--font-d); }
+    .avail-sub { font-size: 11px; color: var(--muted); margin-left: 4px; font-weight: 400; }
+
+    /* === DISPO STRIP === */
+    .dispo { background: var(--dark); padding: 14px 0; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .dispo::-webkit-scrollbar { display: none; }
+    .dispo .c { display: flex; gap: 24px; max-width: none; padding: 0 20px; white-space: nowrap; justify-content: center; }
+    .dispo-i { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.85); flex-shrink: 0; }
+    .dispo-ic { width: 28px; height: 28px; border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; }
+    .dispo-ic.rd { background: rgba(220,38,38,0.2); }
+    .dispo-ic.gn { background: rgba(22,163,74,0.2); }
+    .dispo-ic.bl { background: rgba(2,132,199,0.2); }
+
+    /* === TRUST STRIP === */
+    .trust { background: var(--bg); border-bottom: 1px solid var(--border); padding: 14px 0; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .trust::-webkit-scrollbar { display: none; }
+    .trust .c { display: flex; gap: 20px; max-width: none; padding: 0 20px; white-space: nowrap; }
+    .trust-i { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--body); flex-shrink: 0; }
+    .trust-ic { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .trust-ic.gn { background: rgba(22,163,74,0.08); color: var(--green); }
+    .trust-ic.bl { background: rgba(2,132,199,0.08); color: var(--blue); }
+    .trust-ic.gd { background: rgba(217,119,6,0.08); color: var(--gold); }
+    .trust-ic.rd { background: rgba(220,38,38,0.06); color: var(--cta); }
+
+    /* === SPECIALISTE === */
+    .specialist { background: var(--bg); padding: 48px 0; }
+    .slabel { font-family: var(--font-d); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 8px; }
+    .slabel.red { color: var(--cta); }
+    .slabel.blue { color: var(--blue); }
+    .slabel.gold { color: var(--gold); }
+    .stitle { font-family: var(--font-d); font-size: 26px; font-weight: 800; color: var(--dark); line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 10px; }
+    .sdesc { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 24px; }
+    .spec-card { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--r); position: relative; overflow: hidden; }
+    .spec-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--orange-light)); z-index: 2; }
+    .spec-img { width: 100%; height: 200px; object-fit: cover; display: block; }
+    .spec-body { padding: 24px 20px; }
+    .spec-card p { font-size: 14px; color: var(--body); line-height: 1.7; }
+    .spec-card p strong { color: var(--dark); }
+
+    /* === COMMENT ÇA MARCHE (DUAL TUNNEL) === */
+    .how { background: var(--bg-alt); padding: 48px 0; }
+    .tunnel-tabs { display: flex; gap: 8px; margin-bottom: 24px; }
+    .tunnel-tab { flex: 1; padding: 12px; border-radius: var(--rs); border: 2px solid var(--border); background: var(--bg); text-align: center; cursor: pointer; transition: all 0.25s; }
+    .tunnel-tab.active-urg { border-color: var(--cta); background: rgba(220,38,38,0.04); }
+    .tunnel-tab.active-dev { border-color: var(--dark); background: rgba(26,26,46,0.04); }
+    .tunnel-tab h4 { font-family: var(--font-d); font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+    .tunnel-tab p { font-size: 11px; color: var(--muted); }
+    .tunnel-content { display: none; }
+    .tunnel-content.active { display: block; }
+
+    .steps-col { display: flex; flex-direction: column; gap: 12px; }
+    .step-h { display: flex; gap: 14px; align-items: flex-start; padding: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--rs); }
+    .step-n { flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px; font-family: var(--font-d); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+    .step-n.rd { background: rgba(220,38,38,0.08); color: var(--cta); }
+    .step-n.dk { background: rgba(26,26,46,0.08); color: var(--dark); }
+    .step-h h3 { font-family: var(--font-d); font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+    .step-h p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* === STATS BREAK === */
+    .stats-break { background: linear-gradient(135deg, var(--orange), #c2410c); padding: 32px 0; }
+    .stats-break-row { display: flex; justify-content: space-around; text-align: center; }
+    .sb-num { font-family: var(--font-d); font-size: 32px; font-weight: 900; color: #fff; line-height: 1; }
+    .sb-num span { color: rgba(255,255,255,0.6); }
+    .sb-label { font-size: 11px; color: rgba(255,255,255,0.65); font-weight: 500; margin-top: 4px; }
+
+    /* === SERVICES GRID === */
+    .services { background: var(--bg); padding: 48px 0; }
+    .sgrid { display: flex; flex-direction: column; gap: 12px; }
+    .scard { display: flex; gap: 16px; align-items: flex-start; padding: 20px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--rs); transition: all 0.25s; }
+    .scard:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); transform: translateY(-2px); }
+    .scard-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 22px; }
+    .scard-icon.org { background: var(--orange-soft); }
+    .scard-icon.rd { background: rgba(220,38,38,0.06); }
+    .scard-icon.gn { background: rgba(22,163,74,0.06); }
+    .scard-icon.bl { background: var(--blue-soft); }
+    .scard-icon.dk { background: rgba(26,26,46,0.06); }
+    .scard h3 { font-family: var(--font-d); font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+    .scard p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    /* === PRIX === */
+    .pricing { background: var(--bg-alt); padding: 48px 0; }
+    .price-card { background: var(--bg); border: 2px solid var(--border); border-radius: var(--r); overflow: hidden; }
+    .price-header { background: var(--dark); padding: 24px 20px; text-align: center; }
+    .price-header h3 { font-family: var(--font-d); font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+    .price-big { font-family: var(--font-d); font-size: 48px; font-weight: 900; color: #fff; line-height: 1; }
+    .price-big small { font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.5); }
+    .price-note { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 6px; }
+    .price-body { padding: 20px; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .price-row:last-child { border-bottom: none; }
+    .price-row .pr-label { font-size: 13px; color: var(--body); font-weight: 500; }
+    .price-row .pr-value { font-family: var(--font-d); font-size: 14px; font-weight: 700; color: var(--dark); }
+    .price-includes { padding: 20px; background: rgba(22,163,74,0.04); border-top: 1px solid rgba(22,163,74,0.1); }
+    .price-includes h4 { font-family: var(--font-d); font-size: 13px; font-weight: 700; color: var(--green); margin-bottom: 10px; }
+    .pi-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .pi-list li { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--body); }
+    .pi-list li svg { flex-shrink: 0; color: var(--green); }
+
+    /* === MID CTA === */
+    .mid-cta { background: linear-gradient(135deg, var(--cta), #b91c1c); padding: 36px 0; text-align: center; }
+    .mid-cta h2 { font-family: var(--font-d); font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 6px; line-height: 1.2; }
+    .mid-cta p { font-size: 14px; color: rgba(255,255,255,0.75); margin-bottom: 18px; }
+    .mid-dual { display: flex; gap: 10px; }
+    .btn-w { display: flex; align-items: center; justify-content: center; gap: 8px; flex: 1; padding: 16px; background: #fff; color: var(--cta); font-family: var(--font-d); font-weight: 700; font-size: 15px; border: none; border-radius: var(--r); text-decoration: none; box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .btn-dark { display: flex; align-items: center; justify-content: center; gap: 8px; flex: 1; padding: 16px; background: var(--dark); color: #fff; font-family: var(--font-d); font-weight: 700; font-size: 15px; border: none; border-radius: var(--r); text-decoration: none; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+
+    /* === AVIS === */
+    .reviews { background: var(--dark); padding: 48px 0; }
+    .rev-scroll { display: flex; gap: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; margin: 0 -20px; padding: 0 20px 4px; }
+    .rev-scroll::-webkit-scrollbar { display: none; }
+    .rcard { flex-shrink: 0; width: 280px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--r); padding: 20px; }
+    .rcard-stars { color: var(--gold); font-size: 14px; margin-bottom: 10px; letter-spacing: 2px; }
+    .rcard-text { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 12px; font-style: italic; }
+    .rcard-author { font-size: 13px; font-weight: 600; color: #fff; }
+    .rcard-meta { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+    /* === FAQ === */
+    .faq { background: var(--bg); padding: 48px 0; }
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+    .faq-item { border: 1px solid var(--border); border-radius: var(--rs); overflow: hidden; background: var(--bg); }
+    .faq-q { display: flex; align-items: center; justify-content: space-between; padding: 16px; cursor: pointer; gap: 12px; -webkit-tap-highlight-color: transparent; }
+    .faq-q h3 { font-family: var(--font-d); font-size: 14px; font-weight: 700; color: var(--dark); line-height: 1.35; }
+    .faq-q .faq-chevron { flex-shrink: 0; width: 20px; height: 20px; color: var(--muted); transition: transform 0.25s; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq-a-inner { padding: 0 16px 16px; font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* === ZONES === */
+    .zones { background: var(--bg-alt); padding: 48px 0; }
+    .zone-cards { display: flex; flex-direction: column; gap: 10px; }
+    .zcard { display: flex; align-items: center; gap: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--rs); padding: 14px; }
+    .zcard-icon { font-size: 20px; flex-shrink: 0; }
+    .zcard h4 { font-family: var(--font-d); font-size: 14px; font-weight: 700; color: var(--dark); }
+    .zcard p { font-size: 12px; color: var(--muted); }
+    .zones-note { margin-top: 12px; font-size: 12px; color: var(--light); font-style: italic; }
+
+    /* === URGENCE FINAL === */
+    .urgence { background: linear-gradient(135deg, var(--cta), #991b1b); padding: 44px 0; text-align: center; }
+    .urgence h2 { font-family: var(--font-d); font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 6px; line-height: 1.2; }
+    .urgence p { font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 20px; }
+    .urgence .mid-dual { max-width: 400px; margin: 0 auto; }
+
+    /* === FOOTER === */
+    footer { background: var(--bg); padding: 28px 0 120px; border-top: 1px solid var(--border); }
+    .ft-brand { font-family: var(--font-d); font-weight: 800; font-size: 16px; color: var(--dark); margin-bottom: 8px; }
+    .ft-brand span { color: var(--orange); }
+    .ft-links { display: flex; gap: 16px; margin-bottom: 12px; }
+    .ft-links a { font-size: 12px; color: var(--muted); text-decoration: none; }
+    .ft-copy { font-size: 11px; color: var(--light); }
+
+    /* === FIXED CTA === */
+    .fixed-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; background: rgba(255,255,255,0.96); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-top: 1px solid var(--border); padding: 12px 20px; transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.33,1,0.68,1); box-shadow: 0 -4px 20px rgba(0,0,0,0.06); }
+    .fixed-cta.visible { transform: translateY(0); }
+    .fc-inner { display: flex; gap: 10px; max-width: 480px; margin: 0 auto; }
+    .fc-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; background: var(--cta); color: #fff; font-family: var(--font-d); font-weight: 700; font-size: 15px; border: none; border-radius: var(--rs); text-decoration: none; box-shadow: 0 4px 16px var(--cta-glow); }
+    .fc-alt { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 14px 16px; background: var(--dark); color: #fff; font-family: var(--font-d); font-weight: 600; font-size: 13px; border-radius: var(--rs); text-decoration: none; white-space: nowrap; }
+
+    /* === ANIMATIONS === */
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.4s ease-out, transform 0.4s ease-out; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* === DESKTOP === */
+    @media (min-width: 768px) {
+      .c { max-width: 1100px; }
+      .hero h1 { font-size: 52px; letter-spacing: -2.5px; }
+      .dual-cta { flex-direction: row; }
+      .cta-urgence { width: auto; padding: 18px 32px; }
+      .spec-card { display: flex; flex-direction: row; }
+      .spec-img { width: 280px; height: auto; min-height: 180px; flex-shrink: 0; }
+      .sgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .faq-list { max-width: 640px; }
+      .zone-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .dispo .c { justify-content: center; gap: 40px; }
+      .mid-dual { max-width: 400px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="c">
+      <div class="tb-left">
+        <div class="tb-logo">
+          <img src="/logo.webp" alt="Dépannage France">
+        </div>
+        <div class="tb-name"><b>DEPANNAGE</b><em>FRANCE</em></div>
+      </div>
+      <div class="tb-live"><div class="pulse"></div>Dispo 24h/24</div>
+    </div>
+  </div>
+
+  <!-- HERO — Double CTA -->
+  <section class="hero">
+    <canvas class="heat-canvas" id="heatCanvas"></canvas>
+    <div class="c">
+      <div class="badge-urg"><div class="pulse" style="background:var(--orange)"></div>Spécialistes ballon d'eau chaude — {{SECTOR_NAME}}</div>
+      <h1>Ballon en<br><span class="red">panne</span> ?<br>On <span class="acc">remplace</span>.<br><span style="font-size:0.5em;color:var(--muted);letter-spacing:0">sur {{SECTOR_NAME}}</span></h1>
+      <p class="hero-sub">Dépannage dans l'heure. Installation le jour même. <strong>7j/7, même le week-end.</strong></p>
+      <a href="tel:{{PHONE}}" class="cta-urgence" style="width:100%">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Appeler maintenant
+      </a>
+      <div class="cta-labels">
+        <span class="cta-label">Intervention sous 1h</span>
+        <span class="cta-label">7j/7, jours fériés inclus</span>
+      </div>
+      <div class="avail-badge">
+        <div class="avail-dot"></div>
+        <span class="avail-text">Disponible 24h/24, 7j/7</span>
+        <span class="avail-sub">— même la nuit et les fériés</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANDEAU DISPO -->
+  <div class="dispo">
+    <div class="c">
+      <div class="dispo-i"><div class="dispo-ic gn">&#128197;</div>24h/24, 7j/7</div>
+      <div class="dispo-i"><div class="dispo-ic rd">&#9889;</div>Sous 60 min</div>
+      <div class="dispo-i"><div class="dispo-ic bl">&#9889;</div>Installation J0</div>
+    </div>
+  </div>
+
+  <!-- TRUST STRIP -->
+  <div class="trust">
+    <div class="c">
+      <div class="trust-i"><div class="trust-ic gd"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>4.8/5</div>
+      <div class="trust-i"><div class="trust-ic bl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>Assurance décennale</div>
+      <div class="trust-i"><div class="trust-ic gn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>Prix fixe annoncé</div>
+    </div>
+  </div>
+
+  <!-- SPECIALISTE — Bloc unique, fort -->
+  <section class="specialist fade-in">
+    <div class="c">
+      <div class="slabel">Notre expertise</div>
+      <h2 class="stitle">On ne fait que ça.<br>Les ballons d'eau chaude.</h2>
+      <p class="sdesc">Pas de plomberie générale. Pas de chauffage. Juste les ballons.</p>
+      <div class="spec-card">
+        <img src="/ballon/hero-ballon.webp" alt="Technicien spécialisé en installation de ballon d'eau chaude" class="spec-img">
+        <div class="spec-body">
+          <p>Nous n'intervenons <strong>que sur les ballons d'eau chaude</strong>. Cette spécialisation nous permet de diagnostiquer rapidement, de stocker les modèles les plus courants et d'intervenir sans délai — contrairement à un plombier généraliste qui doit commander et revenir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BREAK -->
+  <div class="stats-break fade-in">
+    <div class="c">
+      <div class="stats-break-row">
+        <div class="sb-stat">
+          <div class="sb-num">1 200<span>+</span></div>
+          <div class="sb-label">Ballons installés</div>
+        </div>
+        <div class="sb-stat">
+          <div class="sb-num">1<span>h</span></div>
+          <div class="sb-label">Délai intervention</div>
+        </div>
+        <div class="sb-stat">
+          <div class="sb-num">J<span>0</span></div>
+          <div class="sb-label">Installation possible</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMENT ÇA MARCHE — Double tunnel -->
+  <section class="how">
+    <div class="c">
+      <div class="slabel red fade-in">Comment ça marche</div>
+      <h2 class="stitle fade-in">Simple, rapide,<br>efficace.</h2>
+      <p class="sdesc fade-in">Un seul interlocuteur, du premier appel à la mise en service.</p>
+
+      <div class="steps-col" style="margin-top:24px;">
+        <div class="step-h fade-in"><div class="step-n rd">1</div><div><h3>Vous appelez</h3><p>Décrivez la panne — fuite, plus d'eau chaude, bruit anormal. On vous répond immédiatement.</p></div></div>
+        <div class="step-h fade-in"><div class="step-n rd">2</div><div><h3>On arrive sous 1h</h3><p>Un technicien spécialisé se déplace avec le matériel et les ballons les plus courants.</p></div></div>
+        <div class="step-h fade-in"><div class="step-n rd">3</div><div><h3>Diagnostic sur place</h3><p>Réparation ou remplacement — on vous propose la solution la plus adaptée, prix annoncé avant.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 BLOCS SERVICES -->
+  <section class="services">
+    <div class="c">
+      <div class="slabel fade-in">Nos services</div>
+      <h2 class="stitle fade-in">Tout est inclus.<br>Rien n'est caché.</h2>
+      <p class="sdesc fade-in">Du diagnostic à l'évacuation de l'ancien ballon.</p>
+      <div class="sgrid">
+        <div class="scard fade-in">
+          <div class="scard-icon rd">&#9889;</div>
+          <div>
+            <h3>Dépannage dans l'heure</h3>
+            <p>Votre ballon est en panne, fuit ou ne chauffe plus ? Un technicien se déplace dans l'heure, 7j/7.</p>
+          </div>
+        </div>
+        <div class="scard fade-in">
+          <div class="scard-icon org">&#128293;</div>
+          <div>
+            <h3>Installation le jour même</h3>
+            <p>Si vous appelez le matin, on peut installer dans la journée. Dépose, pose, mise en service.</p>
+          </div>
+        </div>
+        <div class="scard fade-in">
+          <div class="scard-icon gn">&#128176;</div>
+          <div>
+            <h3>Prix fixe, tout compris</h3>
+            <p>Pose, mise en service, dépose ancien, groupe de sécurité, raccords, évacuation déchetterie. Zéro surprise.</p>
+          </div>
+        </div>
+        <div class="scard fade-in">
+          <div class="scard-icon dk">&#128736;</div>
+          <div>
+            <h3>Spécialistes dédiés</h3>
+            <p>On ne fait que les ballons d'eau chaude. Stock des modèles courants, diagnostic rapide, intervention optimisée.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARIFS -->
+  <section class="pricing" id="tarifs">
+    <div class="c">
+      <div class="slabel gold fade-in">Tarifs transparents</div>
+      <h2 class="stitle fade-in">Prix fixe.<br>Tout compris.</h2>
+      <p class="sdesc fade-in">Pas de frais cachés. Le prix annoncé est le prix payé.</p>
+      <div class="price-card fade-in">
+        <div class="price-header">
+          <h3>Ballon + installation</h3>
+          <div class="price-big" style="font-size:36px;">Dès 780 € <small>TTC</small></div>
+          <div class="price-note">Ballon fourni, posé, tout compris</div>
+        </div>
+        <div class="price-body">
+          <div class="price-row"><span class="pr-label">50 litres</span><span class="pr-value">~780 €</span></div>
+          <div class="price-row"><span class="pr-label">75 litres</span><span class="pr-value">~820 €</span></div>
+          <div class="price-row"><span class="pr-label">100 litres</span><span class="pr-value">~860 €</span></div>
+          <div class="price-row"><span class="pr-label">150 litres</span><span class="pr-value">~950 €</span></div>
+          <div class="price-row"><span class="pr-label">200 litres</span><span class="pr-value">~1 030 €</span></div>
+          <div class="price-row"><span class="pr-label">250 litres</span><span class="pr-value">~1 300 €</span></div>
+          <div class="price-row"><span class="pr-label">300 litres</span><span class="pr-value">~1 430 €</span></div>
+        </div>
+        <div class="price-includes">
+          <h4>Inclus dans chaque installation</h4>
+          <ul class="pi-list">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Dépose de l'ancien ballon</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Pose et mise en service</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Groupe de sécurité neuf</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Raccords et matériaux</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Évacuation en déchetterie</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MID CTA -->
+  <section class="mid-cta">
+    <div class="c">
+      <h2>Prêt à en finir<br>avec la panne ?</h2>
+      <p>Intervention dans l'heure — même le week-end.</p>
+      <a href="tel:{{PHONE}}" class="btn-w" style="display:inline-flex;align-items:center;gap:8px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Appeler maintenant
+      </a>
+    </div>
+  </section>
+
+  <!-- AVIS -->
+  <section class="reviews">
+    <div class="c">
+      <div class="slabel fade-in" style="color:var(--gold)">Avis clients</div>
+      <h2 class="stitle fade-in" style="color:#fff;font-size:22px;">Ils n'avaient plus d'eau chaude.<br>On a réglé ça.</h2>
+      <p class="sdesc fade-in" style="color:rgba(255,255,255,0.5);margin-bottom:20px;">Avis vérifiés après intervention.</p>
+      <div class="rev-scroll">
+{{REVIEWS}}
+      </div></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="c">
+      <div class="slabel blue fade-in">Questions fréquentes</div>
+      <h2 class="stitle fade-in">Vos questions.<br>Nos réponses.</h2>
+      <div class="faq-list">
+        <div class="faq-item fade-in">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h3>Mon ballon fuit — faut-il le remplacer d'urgence ?</h3>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-a"><div class="faq-a-inner">Pas forcément. Une fuite peut venir du groupe de sécurité ou d'un raccord. Notre technicien diagnostique sur place et vous propose la solution la plus adaptée — réparation si possible, remplacement si nécessaire. Dans tous les cas, on intervient dans l'heure.</div></div>
+        </div>
+        <div class="faq-item fade-in">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h3>Intervenez-vous le dimanche et les jours fériés ?</h3>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-a"><div class="faq-a-inner">Oui. Nous sommes disponibles 7j/7, y compris les week-ends et jours fériés. Une panne d'eau chaude n'attend pas — nous non plus.</div></div>
+        </div>
+        <div class="faq-item fade-in">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h3>Combien de temps dure l'installation ?</h3>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-a"><div class="faq-a-inner">En moyenne 2 à 3 heures. Cela inclut la dépose de l'ancien ballon, la pose du nouveau, la mise en service complète et l'évacuation de l'ancien appareil en déchetterie.</div></div>
+        </div>
+        <div class="faq-item fade-in">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h3>Vous occupez-vous de l'ancien ballon ?</h3>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-a"><div class="faq-a-inner">Oui, c'est inclus dans le prix. On dépose l'ancien ballon et on l'emporte pour évacuation en déchetterie. Vous n'avez rien à faire.</div></div>
+        </div>
+        <div class="faq-item fade-in">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h3>L'installation le jour même est-elle garantie ?</h3>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-a"><div class="faq-a-inner">Si vous nous appelez le matin et que le modèle est en stock, oui. On vous confirme le créneau dès le premier appel.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZONES -->
+  <section class="zones">
+    <div class="c">
+      <div class="slabel fade-in">Zone d'intervention</div>
+      <h2 class="stitle fade-in">{{SECTOR_NAME}} et environs</h2>
+      <p class="sdesc fade-in">Nos techniciens interviennent au plus vite, où que vous soyez.</p>
+      <div class="zone-cards">
+{{ZONE_SECTORS}}
+      </div>
+      <p class="zones-note fade-in">Votre commune n'est pas listée ? Appelez, on intervient probablement chez vous.</p>
+    </div>
+  </section>
+
+  <!-- URGENCE FINAL -->
+  <section class="urgence">
+    <div class="c">
+      <h2>Plus d'eau chaude ?</h2>
+      <p>On intervient dans l'heure — même le week-end.</p>
+      <a href="tel:{{PHONE}}" class="btn-w" style="display:inline-flex;align-items:center;gap:8px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Appeler maintenant
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="c">
+      <div class="ft-brand">dépannage<span>france</span></div>
+      <div class="ft-links"><a href="#">Mentions légales</a><a href="#">CGV</a><a href="#">Contact</a></div>
+      <div class="ft-copy">&copy; 2026 Dépannage France — Spécialistes ballon d'eau chaude {{SECTOR_NAME}} — Tous droits réservés</div>
+    </div>
+  </footer>
+
+  <!-- FIXED CTA -->
+  <div class="fixed-cta" id="fixedCta">
+    <div class="fc-inner">
+      <a href="tel:{{PHONE}}" class="fc-btn" style="flex:1;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Appeler maintenant
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Fixed CTA visibility
+    const f=document.getElementById('fixedCta'),h=document.querySelector('.hero');
+    new IntersectionObserver(([e])=>{f.classList.toggle('visible',!e.isIntersecting)},{threshold:0}).observe(h);
+
+    // Fade-in on scroll
+    const obs=new IntersectionObserver(es=>{es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*50);obs.unobserve(e.target)}})},{threshold:0.1});
+    document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+    // FAQ accordion
+    function toggleFaq(q){
+      const item=q.parentElement;
+      const a=item.querySelector('.faq-a');
+      const wasOpen=item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(fi=>{
+        fi.classList.remove('open');
+        fi.querySelector('.faq-a').style.maxHeight=null;
+      });
+      if(!wasOpen){
+        item.classList.add('open');
+        a.style.maxHeight=a.scrollHeight+'px';
+      }
+    }
+
+    // Heat particles canvas
+    (()=>{
+      const c=document.getElementById('heatCanvas');
+      if(!c)return;
+      const x=c.getContext('2d'),d=devicePixelRatio||1;
+      let w,hw;
+      function r(){
+        const b=c.parentElement.getBoundingClientRect();
+        w=b.width;hw=b.height;
+        c.width=w*d;c.height=hw*d;
+        c.style.width=w+'px';c.style.height=hw+'px';
+        x.setTransform(d,0,0,d,0,0);
+      }
+      r();addEventListener('resize',r);
+      const particles=[];
+      function spawn(){
+        if(particles.length<25){
+          particles.push({
+            x:Math.random()*w,
+            y:hw+5,
+            vy:-(0.3+Math.random()*0.5),
+            vx:(Math.random()-0.5)*0.3,
+            r:2+Math.random()*3,
+            a:0.04+Math.random()*0.04,
+            life:1
+          });
+        }
+      }
+      const dt=1000/24;
+      function tick(){
+        x.clearRect(0,0,w,hw);
+        if(Math.random()<0.15)spawn();
+        for(let i=particles.length-1;i>=0;i--){
+          const p=particles[i];
+          p.y+=p.vy;
+          p.x+=p.vx+Math.sin(p.y*0.02)*0.3;
+          p.life-=0.004;
+          if(p.life<=0||p.y<-10){particles.splice(i,1);continue;}
+          const g=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*2);
+          g.addColorStop(0,`rgba(234,88,12,${p.a*p.life})`);
+          g.addColorStop(0.5,`rgba(249,115,22,${p.a*p.life*0.5})`);
+          g.addColorStop(1,'rgba(245,158,11,0)');
+          x.fillStyle=g;
+          x.beginPath();
+          x.arc(p.x,p.y,p.r*2,0,Math.PI*2);
+          x.fill();
+        }
+      }
+      setInterval(tick,dt);
+    })();
+  </script>
+  {{POSTHOG_SCRIPT}}
+</body>
+</html>

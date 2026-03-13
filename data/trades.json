@@ -134,5 +134,71 @@
       { "number": "4.8<span>/5</span>", "label": "Note clients" },
       { "number": "97<span>%</span>", "label": "Réparées 1re visite" }
     ]
+  },
+  {
+    "slug": "auto",
+    "name": "Dépannage Auto",
+    "template": "auto.html",
+    "title": "Dépannage Auto {{SECTOR_NAME}} ({{DEPARTMENT}}) — Intervention 30 min 24h/24",
+    "metaDescription": "Dépannage automobile à {{SECTOR_NAME}} et environs ({{CITIES_SHORT}}). Panne, crevaison, batterie, remorquage. Intervention en 30 min, 24h/24.",
+    "reviews": [
+      {
+        "text": "Panne en pleine nuit sur l'autoroute. Le dépanneur est arrivé en 25 minutes, très professionnel et rassurant.",
+        "author": "Marie L.",
+        "loc": "Autoroute, 23h",
+        "initial": "M"
+      },
+      {
+        "text": "Batterie morte un dimanche. Véhicule redémarré en 10 minutes. Prix annoncé respecté, aucun supplément.",
+        "author": "Thomas R.",
+        "loc": "Dimanche matin",
+        "initial": "T"
+      },
+      {
+        "text": "Crevaison en pleine nuit. Réponse immédiate, dépanneur sur place en 20 minutes. Réactivité parfaite.",
+        "author": "Sophie M.",
+        "loc": "2h du matin",
+        "initial": "S"
+      },
+      {
+        "text": "Panne moteur sur le périphérique. Remorqué jusqu'à mon garage en moins d'une heure. Tarif clair dès le départ.",
+        "author": "Philippe D.",
+        "loc": "Périphérique",
+        "initial": "P"
+      }
+    ]
+  },
+  {
+    "slug": "ballon",
+    "name": "Ballon d'eau chaude",
+    "template": "ballon-eau-chaude.html",
+    "title": "Remplacement & Dépannage Ballon d'Eau Chaude {{SECTOR_NAME}} ({{DEPARTMENT}})",
+    "metaDescription": "Spécialistes ballon d'eau chaude à {{SECTOR_NAME}} et environs ({{CITIES_SHORT}}). Dépannage dans l'heure 7j/7. Installation le jour même.",
+    "reviews": [
+      {
+        "text": "Ballon qui fuyait un samedi soir. Ils sont venus en 45 min, diagnostic rapide, remplacement le lundi matin. Impeccable.",
+        "author": "Thomas R.",
+        "meta": "Remplacement 200L",
+        "initial": "T"
+      },
+      {
+        "text": "Devis reçu par SMS en 20 min après avoir envoyé les photos. Installation faite le lendemain matin. Prix respecté à l'euro près.",
+        "author": "Nadia M.",
+        "meta": "Installation 150L",
+        "initial": "N"
+      },
+      {
+        "text": "Plus d'eau chaude depuis 2 jours. Appelé le matin, nouveau ballon posé l'après-midi. Ils ont même emporté l'ancien.",
+        "author": "Jean-Pierre L.",
+        "meta": "Remplacement 100L",
+        "initial": "J"
+      },
+      {
+        "text": "Très pro. Le technicien a tout expliqué, pas de mauvaise surprise sur la facture. Je recommande sans hésiter.",
+        "author": "Fatima B.",
+        "meta": "Dépannage",
+        "initial": "F"
+      }
+    ]
   }
 ]
